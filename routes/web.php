@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/login', [UserController::class, 'loginView'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login.post');
 
@@ -22,6 +23,6 @@ Route::post('/order/custom', [OrderController::class, 'customSave'])->name('orde
 
 
 // Search
-Route::get('/products', [ProductController::class, 'index'])->name('search');
+Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/getProducts', [ProductController::class, 'getProducts'])->name('products.get');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show');

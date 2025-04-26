@@ -154,7 +154,7 @@
                             <div class="w-full md:w-2/3 flex flex-col justify-between">
                                 <div>
                                     <h2 class="text-xl font-bold text-gray-900 mb-2">
-                                        <a href="products/${product.id}">${product.name}</a>
+                                        <a href="{{ url('products') }}/${product.id}">${product.name}</a>
                                     </h2>
                                     <div class="flex flex-wrap gap-2 mb-4">
                                         ${product.categories.map(cat => `<span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">${cat.name}</span>`).join('')}
