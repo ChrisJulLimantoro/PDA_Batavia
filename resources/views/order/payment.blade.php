@@ -55,6 +55,7 @@
                 <input type="hidden" name="price" value="{{ $price }}">
                 <input type="hidden" name="subtotal" value="{{ $subtotal }}">
                 <input type="hidden" name="shipping_cost" value="{{ $shipping_cost }}">
+                <input type="hidden" name="tax" value="{{ $tax }}">
                 <input type="hidden" name="total_price" value="{{ $total_price }}">
                 <input type="hidden" name="address" value="{{ $address }}">
                 <input type="hidden" name="description" value="{{ $description }}">
@@ -78,6 +79,10 @@
                         <div class="flex justify-between items-center w-full">
                             <div class="text-md">Shipping Cost</div>
                             <div>{{'Rp '. number_format($shipping_cost,0,',','.') }}</div>
+                        </div>
+                        <div class="flex justify-between items-center w-full">
+                            <div class="text-md">Tax</div>
+                            <div>{{'Rp '. number_format($tax,0,',','.') }}</div>
                         </div>
                         <div class="flex justify-between items-center w-full mb-3">
                             <div class="text-md font-bold">Total</div>
@@ -132,6 +137,7 @@
                 formData.append('price', $('input[name="price"]').val());
                 formData.append('subtotal', $('input[name="subtotal"]').val());
                 formData.append('shipping_cost', $('input[name="shipping_cost"]').val());
+                formData.append('tax', $('input[name="tax"]').val());
                 formData.append('total_price', $('input[name="total_price"]').val());
                 formData.append('address', $('input[name="address"]').val());
                 formData.append('description', $('input[name="description"]').val());

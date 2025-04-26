@@ -30,7 +30,7 @@ class OrderMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Confirmation - ' . $this->data['user_name'].' - '.$this->data['created_at'],
+            subject: 'Batavia Order Confirmation - ' . $this->data->user->name,
         );
     }
 
@@ -40,20 +40,7 @@ class OrderMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.rsvp',
+            markdown: 'mail.order',
         );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        $array = [];
-        $array[] = Attachment::fromStorageDisk('public', 'attachment/peraturan_raplen_compressed.pdf')->withMime('application/pdf')->as('PERATURAN RAPAT PLENO WGG 2024.pdf');
-
-        return $array;
     }
 }

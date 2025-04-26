@@ -44,8 +44,9 @@ class OrderController extends BaseController
             $data['subtotal'] = $price['price'] * $data['quantity'];
             // Set Shipping Cost
             $data['shipping_cost'] = 0.1 * $data['subtotal'];
+            $data['tax'] = 0.1 * ($data['subtotal'] + $data['shipping_cost']);
 
-            $data['total_price'] = $data['subtotal'] + $data['shipping_cost'];
+            $data['total_price'] = $data['subtotal'] + $data['shipping_cost'] + $data['tax'];
         }
         
         // Get all Products save state at session first
@@ -56,6 +57,7 @@ class OrderController extends BaseController
         $request->session()->put('subtotal', $data['subtotal']);
         $request->session()->put('total_price', $data['total_price']);
         $request->session()->put('shipping_cost', $data['shipping_cost']);
+        $request->session()->put('tax', $data['tax']);
         $request->session()->put('price', $data['price']);
         // Redirect
         return redirect()->route('order.payment');
@@ -79,6 +81,7 @@ class OrderController extends BaseController
             'description' => $data['description'],
             'total_price' => $data['total_price'],
             'shipping_cost' => $data['shipping_cost'],
+            'tax' => $data['tax'],
             'subtotal' => $data['subtotal'],
             'price' => $data['price'],
             'product' => $product,
@@ -104,9 +107,10 @@ class OrderController extends BaseController
         }
 
         $created =  $this->model->create($requestFillable);
+        $data = $this->getById($created->id);
         if ($created) {
             //TODO: ADD NOTIFICATION FOR EMAIL AND SWAL AT HOME
-            $this->sendMailCreated($created);
+            $this->sendMailCreated($data);
             // return redirect()->route('home')->withSuccess('Order created successfully');
             return response()->json([
                 'success' => true,
@@ -175,7 +179,9 @@ class OrderController extends BaseController
 
         // Save the data
         $created =  $this->model->create($data);
+        $data = $this->getById($created->id);
         if ($created) {
+            $this->sendMailCustom($data);
             return response()->json([
                 'success' => true,
                 'message' => 'Order created successfully',
@@ -194,6 +200,12 @@ class OrderController extends BaseController
     public function sendMailCreated($data)
     {
         $mail = new MailController(new \App\Mail\OrderMail($data));
-        dispatch(new SendMailJob($mail, ['to' => $data['user']->email]));
+        dispatch(new SendMailJob($mail, ['to' => $data->user->email]));
+    }
+
+    public function sendMailCustom($data)
+    {
+        $mail = new MailController(new \App\Mail\CollaborationMail($data));
+        dispatch(new SendMailJob($mail, ['to' => $data->user->email]));
     }
 }

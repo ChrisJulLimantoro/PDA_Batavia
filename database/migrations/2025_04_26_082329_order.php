@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->foreignUuid('product_id')->constrained('products')->onDelete('cascade');
             $table->integer('quantity')->default(1);
             $table->integer('subtotal')->default(0);
+            $table->integer('tax')->default(0);
             $table->integer('total_price')->default(0);
             $table->integer('shipping_cost')->default(0);
             $table->integer('price')->default(0);
