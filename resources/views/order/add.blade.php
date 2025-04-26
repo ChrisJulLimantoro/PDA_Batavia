@@ -49,7 +49,7 @@
                     </p>
                 </div>
 
-            </div>
+                </div>
 
             <form class="w-full" method="POST" action="{{ route('order.add.post') }}">
                 @csrf

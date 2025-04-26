@@ -48,7 +48,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <style>
-
         canvas {
             margin: auto;
             position: fixed;
@@ -71,8 +70,10 @@
 
 <body class="p-0 m-0 overflow-hidden h-screen font-asap relative">
 
-    {{-- Baymax --}}
-    <div class="w-full h-full justify-center items-center flex flex-col bg-transparent">
+    {{-- Navbar --}}
+    @include('components.navbar')
+
+    <div class="w-full h-full justify-center items-center flex flex-col bg-transparent mt-10">
         @yield('content')
     </div>
 
