@@ -1,0 +1,136 @@
+
+    .hero-image {
+        min-height: 16rem;
+    }
+
+    .heritage-card {
+        perspective: 1000px;
+    }
+
+    .heritage-image {
+        transition: transform 0.7s ease;
+    }
+
+    .product-card {
+        transition: all 0.3s ease;
+        will-change: transform;
+    }
+
+    .partners-section img {
+        filter: grayscale(100%);
+        transition: filter 0.3s ease;
+    }
+
+    .partners-section img:hover {
+        filter: grayscale(0%);
+    }
+
+    .showcase-container {
+        perspective: 1000px;
+    }
+    
+    #map-tooltip {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.8);
+        color: red;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 14px;
+        pointer-events: none;
+        z-index: 9999;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+        white-space: nowrap;
+    }
+    
+    #map-tooltip.show {
+        opacity: 1;
+    }
+
+    .map-container {
+        position: relative;
+    }
+    
+    #indonesia-map {
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
+
+    @media (min-width: 768px) {
+        .hero-image {
+            min-height: 20rem;
+        }
+    }
+
+    body {
+        scroll-behavior: smooth;
+    }
+    
+    .animate-loop-scroll {
+        animation: loop-scroll 30s linear infinite;
+        width: max-content;
+    }
+    
+    @keyframes loop-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+    
+    .region-hover {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        fill: #f3f4f6;
+    }
+    
+    .region-hover:hover {
+        fill: #f59e0b;
+        filter: brightness(1.1);
+    }
+    
+    .region-hover.active {
+        fill: #d97706;
+        filter: brightness(1.2);
+    }
+    
+    #map-tooltip {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        pointer-events: none;
+        z-index: 100;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+        white-space: nowrap;
+        font-family: sans-serif;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    #map-tooltip.show {
+        opacity: 1;
+    }
+
+    .map-container {
+        position: relative;
+        padding: 20px;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #d1a054;
+        border-radius: 3px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #b78a4a;
+    }
