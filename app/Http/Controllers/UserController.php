@@ -52,6 +52,6 @@ class UserController extends BaseController
         // Set Session to be logged in with the user_id
         $request->session()->put('user_id', $checkE->id);
         $request->session()->put('user_name', $checkE->name);
-        return redirect()->intended('dashboard');
+        return redirect()->route('order.add');
     }
 }
