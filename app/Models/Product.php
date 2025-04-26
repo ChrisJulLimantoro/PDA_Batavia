@@ -124,9 +124,7 @@ class Product extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'category_products', 'product_id', 'category_id')
-            ->withPivot('id')
-            ->withTimestamps();
+        return $this->belongsToMany(Category::class, 'category_products', 'product_id', 'category_id');
     }
 
     /**
@@ -134,8 +132,6 @@ class Product extends Model
      */
     public function vendors()
     {
-        return $this->belongsToMany(Vendor::class, 'product_vendors', 'product_id', 'vendor_id')
-            ->withPivot('id')
-            ->withTimestamps();
+        return $this->belongsToMany(Vendor::class, 'product_vendors', 'product_id', 'vendor_id');
     }
 }

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('description');
             $table->json('price')->nullable();
             $table->string('image')->nullable();
-            $table->string('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
