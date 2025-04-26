@@ -328,6 +328,25 @@
                 const file = this.files[0];
                 if (file) {
                     console.log('File selected:', file);
+                    const formData = new FormData();
+                    formData.append('image', file);
+                    // POST url
+                    fetch('{{ route('products.image') }}', {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}' // VERY important for Laravel
+                            }
+                        })                      
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Response:', data);
+                            // Redirect to the products page with the query
+                            window.location.href = '{{ route('products') }}?category=' + data.query;
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
                 }
             });
         });

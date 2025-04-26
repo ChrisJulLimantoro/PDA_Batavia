@@ -139,8 +139,7 @@ class ProductController extends BaseController
         $result = Http::attach('file', file_get_contents($image), 'image.jpg')
             ->post('http://0.0.0.0:8000/predict');
         $response = json_decode($result->body(), true);
-        dd($response);
-        return response()->json(['message' => 'Image processed successfully']);
+        return response()->json(['query' => $response['predicted_class']]);
     }
 
     // Return PRODUCT ID
@@ -167,13 +166,13 @@ class ProductController extends BaseController
         I will provide a list of item names and descriptions for different kinds of batik, a
             traditional cloth from Indonesia. I will also provide a prompt containing what a
             user would like to create using the app. Based on those 2 prompts, give me a
-            json list of ids of items that might suit the user's needs. [ONLY RETURN THE LIST OF IDS, DO NOT RETURN ANY OTHER TEXT]
+            json list of ids of items that might suit the user's needs. [ONLY RETURN THE LIST OF IDS, DO NOT RETURN ANY OTHER TEXT, ATLEAST RETURN 1 ID CLOSEST TO THE PROMPT]
             Below is the dataset:
             ".json_encode($products)."
 
             Here is the prompt:
             ".$search;
-        // dd($prompt);
+        dd($prompt);
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -198,7 +197,14 @@ class ProductController extends BaseController
 
         // Decode the JSON string
         $decodedJson = json_decode($jsonString, true);
-
-        return response()->json($decodedJson);
+        // Fetch the products based on the decoded JSON
+        if($decodedJson){
+            $res = $this->model
+            ->with(['categories'])
+            ->whereIn('id', $decodedJson)->get();
+            return response()->json($res);
+        }else{
+            return response()->json([]);
+        }
     }
 }

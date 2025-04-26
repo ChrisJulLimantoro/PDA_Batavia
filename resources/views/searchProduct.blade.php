@@ -46,7 +46,7 @@
             <!-- Semantic Toggle -->
             <div class="mb-2">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-md font-bold mb-2 text-gray-700">Material Category</h3>
+                    <h3 class="text-md font-bold mb-2 text-gray-700">Search With AI</h3>
                     <label for="semantic-toggle" class="flex items-center gap-2">
                         <input type="checkbox" id="semantic-toggle" class="hidden" />
                         <div class="relative w-10 h-6">
@@ -65,7 +65,7 @@
                     @foreach ($categories as $category)
                         <label class="inline-flex items-center text-gray-600 hover:text-pink-600">
                             <input type="checkbox" class="form-checkbox text-pink-600" value="{{ $category->id }}"
-                                data-filter="category" @if (request()->category === $category->name) checked @endif>
+                                data-filter="category" @if (str_contains(request()->category, $category->name) ) checked @endif>
                             <span class="ml-2 text-sm">{{ $category->name }}</span>
                         </label>
                     @endforeach
@@ -79,7 +79,7 @@
                     @foreach ($origins as $origin)
                         <label class="inline-flex items-center text-gray-600 hover:text-pink-600">
                             <input type="checkbox" class="form-checkbox text-pink-600" value="{{ $origin->id }}"
-                                data-filter="origin">
+                                data-filter="origin" @if (str_contains(request()->category, $origin->name)) checked @endif>
                             <span class="ml-2 text-sm">{{ $origin->name }}</span>
                         </label>
                     @endforeach
@@ -259,6 +259,28 @@
                 });
             }
 
+            // Function fetch AI
+            function fetchAI() {
+                const searchKeyword = $('#search').val().toLowerCase();
+
+                $.ajax({
+                    url: "{{ route('products.gemini') }}",
+                    method: 'POST',
+                    data: {
+                        search: searchKeyword,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(data) {
+                        allProducts = data;
+                        renderProducts(allProducts);
+                        updateResultCount(allProducts.length);
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+
             // Render products
             function renderProducts(products) {
                 let html = '';
@@ -318,8 +340,13 @@
             });
 
             $('#search').on('keypress', function(event) {
+                const toggle = $("#semantic-toggle").is(':checked');
                 if (event.key === 'Enter') { // Check if the pressed key is Enter
-                    fetchProducts(); // Trigger product fetch when Enter is pressed
+                    if (toggle) {
+                        fetchAI();
+                    } else {
+                        fetchProducts(); // Trigger product fetch when Enter is pressed
+                    }
                 }
             });
 
@@ -341,6 +368,22 @@
                 const file = this.files[0];
                 if (file) {
                     console.log('File selected:', file);
+                    const form = new FormData();
+                    form.append('image', file);
+                    form.append('_token', '{{ csrf_token() }}');
+                    $.ajax({
+                        url: "{{ route('products.image') }}",
+                        method: 'POST',
+                        data: form,
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            window.location.href = '{{ route('products') }}?category=' + data.query;
+                        },
+                        error: function(xhr) {
+                            console.error(xhr.responseText);
+                        }
+                    });
                 }
             });
         });

@@ -4,18 +4,18 @@
 @endsection()
 @section('content')
 <div
-    class="h-full md:h-3/4 max-h-[95vh] md:max-h-[80vh] w-full md:w-3/4 bg-white md:rounded-lg overflow-scroll bg-white shadow-xl"
+    class="h-full md:h-3/4 max-h-[95vh] md:max-h-[80vh] w-full md:w-3/4 bg-white md:rounded-lg overflow-scroll bg-white shadow-xl mt-0 md:mt-16"
 >  
         <!-- Title Stepper OnBoarding Step -->
 		<div class="grid grid-cols-2 py-4 md:py-6">
 			<!-- Step 1 -->
 			<div class="flex flex-col items-center">
 				<div
-					class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-black text-white"
+					class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-orange-600 text-white"
 				>
 					1
 				</div>
-				<div class="mt-2 text-sm text-center">
+				<div class="mt-2 text-sm text-orange-600 text-center">
 					Place Your Order
 				</div>
 			</div>
@@ -23,11 +23,11 @@
 			<!-- Step 2 -->
 				<div class="flex flex-col items-center">
 					<div
-						class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-white border border-pinkDark"
+						class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-white border border-orange-600 text-orange-600"
 					>
 						2
 					</div>
-					<div class="mt-2 text-sm text-center">
+					<div class="mt-2 text-sm text-orange-600 text-center">
 						Payment
 					</div>
 				</div>
@@ -81,7 +81,7 @@
                             id="quantity"
                             class="w-full rounded-lg border-gray-300 focus:ring-opacity-50"
                             placeholder="Quantity"
-                            value="{{ old('quantity') ? old('quantity') : $quantity ? $quantity : 1 }}"
+                            value="{{ (old('quantity') ? old('quantity') : $quantity) ? $quantity : 1 }}"
                             required
                         >
                         @error('quantity')
@@ -134,7 +134,7 @@
                         <div class=h-full>
                             <button
                                 type="submit"
-                                class="h-full w-full bg-black text-white rounded-lg py-2 px-4 transition duration-300"
+                                class="h-full w-full bg-orange-600 hover:bg-orange-700 text-white rounded-lg py-2 px-4 transition duration-300"
                             >
                                 Next
                             </button>

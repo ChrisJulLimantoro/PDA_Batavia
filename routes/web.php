@@ -29,5 +29,5 @@ Route::middleware([isAuthenticated::class])->group(function () {
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/getProducts', [ProductController::class, 'getProducts'])->name('products.get');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show');
-Route::get('/products-by-gemini', [ProductController::class, 'searchByGemini'])->name('products.gemini');
+Route::post('/products-by-gemini', [ProductController::class, 'searchByGemini'])->name('products.gemini');
 Route::post('/products-by-image', [ProductController::class, 'searchByImage'])->name('products.image');

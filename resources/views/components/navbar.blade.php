@@ -16,12 +16,18 @@
 
     <!-- Buttons -->
     <div class="hidden md:flex space-x-4">
+        @if(!Session::has('user_id'))
         <button class="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
             Sign Up
         </button>
-        <button class="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
+        <a href="{{ route('login') }}" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
             Login
-        </button>
+        </a>
+        @else
+        <a href="{{ route('logout') }}" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
+            Logout
+        </a>
+        @endif
     </div>
 
     <!-- Mobile Menu Button -->
@@ -39,12 +45,18 @@
     <a href="/about" class="hover:text-orange-700">About Us</a>
     <a href="{{ route('products') }}" class="hover:text-orange-700">Products</a>
     <div class="flex flex-col space-y-2 pt-2 border-t">
+        @if(!Session::has('user_id'))
         <button class="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
             Sign Up
         </button>
-        <button class="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
+        <a href="{{ route('login') }}" class="text-center bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
             Login
-        </button>
+        </a>
+        @else
+        <a href="{{ route('logout') }}" class="text-center bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
+            Logout
+        </a>
+        @endif
     </div>
 </div>
 

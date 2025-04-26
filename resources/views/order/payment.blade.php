@@ -4,18 +4,18 @@
 @endsection()
 @section('content')
 <div
-class="h-full md:h-3/4 max-h-[95vh] md:max-h-[80vh] w-full md:w-3/4 bg-white md:rounded-lg overflow-scroll bg-white shadow-xl"
+class="h-full md:h-3/4 max-h-[95vh] md:max-h-[80vh] w-full md:w-3/4 bg-white md:rounded-lg overflow-scroll bg-white shadow-xl mt-16"
 >  
         <!-- Title Stepper OnBoarding Step -->
 		<div class="grid grid-cols-2 py-4 md:py-6">
 			<!-- Step 1 -->
 			<div class="flex flex-col items-center">
 				<div
-                class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-white border border-pinkDark"
+                class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-white border border-orange-600 text-orange-600"
 				>
 					1
 				</div>
-				<div class="mt-2 text-sm text-center">
+				<div class="mt-2 text-sm text-orange-600 text-center">
 					Place Your Order
 				</div>
 			</div>
@@ -23,11 +23,11 @@ class="h-full md:h-3/4 max-h-[95vh] md:max-h-[80vh] w-full md:w-3/4 bg-white md:
 			<!-- Step 2 -->
             <div class="flex flex-col items-center">
                 <div
-                    class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-black text-white"
+                    class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-orange-600 text-white"
                 >
                     2
                 </div>
-                <div class="mt-2 text-sm text-center">
+                <div class="mt-2 text-sm text-orange-600 text-center">
                     Payment
                 </div>
             </div>
@@ -115,7 +115,7 @@ class="h-full md:h-3/4 max-h-[95vh] md:max-h-[80vh] w-full md:w-3/4 bg-white md:
                             <button
                                 id="submit"
                                 type="button"
-                                class="h-full w-full bg-black text-white rounded-lg py-2 px-4 transition duration-300"
+                                class="h-full w-full bg-orange-600 hover:bg-orange-700 text-white rounded-lg py-2 px-4 transition duration-300"
                             >
                                 Submit Order
                             </button>

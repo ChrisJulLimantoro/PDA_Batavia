@@ -111,7 +111,7 @@
             border: 1px solid #e2400f;
         }
 
-        .button:hover .lable {
+        .button:hover .label {
             /* background: #fff; */
             color: #e2400f;
         }

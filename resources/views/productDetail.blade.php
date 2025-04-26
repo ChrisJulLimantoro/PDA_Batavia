@@ -191,8 +191,8 @@
 
         </div>
     </div>
-    </div>
-
+@endsection
+@section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script src="{{ asset('js/productDetail-animation.js') }}"></script>
@@ -221,16 +221,16 @@
         const collabBtn = document.getElementById('collab-button');
 
         orderBtn.addEventListener('click', () => {
-            window.location.href = '{{ route('order.add') }}'.
-            '?product_id='.
-            '{{ $product->id }}'.
-            '&quantity='.quantity;
+            window.location.href = '{{ route("order.add") }}'+
+            '?product_id='+
+            '{{ $product->id }}'+
+            '&quantity='+quantity;
         })
         collabBtn.addEventListener('click', () => {
-            window.location.href = '{{ route('order.custom') }}'.
-            '?product_id='.
-            '{{ $product->id }}'.
-            '&quantity='.quantity;
+            window.location.href = '{{ route("order.custom") }}'+
+            '?product_id='+
+            '{{ $product->id }}'+
+            '&quantity='+quantity;
         })
     </script>
 @endsection
