@@ -21,12 +21,15 @@ class OrderController extends BaseController
 
     public function addView(Request $request)
     {
-        $data = $request->input('product_id');
+        // Get the GET parameter
+        $prod_id = $request->input('product_id');
+        $qty = $request->input('quantity');
         // Get all Products
         $products = Product::all();
         return view('order.add', [
-            'product_id' => $data,
+            'product_id' => $prod_id,
             'products' => $products,
+            'quantity' => $qty,
         ]);
     }
 
@@ -120,7 +123,6 @@ class OrderController extends BaseController
         $created =  $this->model->create($requestFillable);
         $data = $this->getById($created->id);
         if ($created) {
-            //TODO: ADD NOTIFICATION FOR EMAIL AND SWAL AT HOME
             $this->sendMailCreated($data);
             // return redirect()->route('home')->withSuccess('Order created successfully');
             return response()->json([
@@ -139,15 +141,14 @@ class OrderController extends BaseController
 
     public function custom(Request $request)
     {
-        if (session('user_id') == null) {
-            return redirect()->route('login')->with('error', 'Please login first');
-        }
-        $data = $request->input('product_id');
+        $prod_id = $request->input('product_id');
+        $qty = $request->input('quantity');
         // Get all Products
         $products = Product::all();
         return view('order.custom', [
-            'product_id' => $data,
+            'product_id' => $prod_id,
             'products' => $products,
+            'quantity' => $qty,
         ]);
     }
 

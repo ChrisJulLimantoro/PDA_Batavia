@@ -113,25 +113,25 @@
                     <div class="mb-8">
                         <h3 class="text-sm font-medium text-gray-500 mb-2">PRICING</h3>
                         <div class="space-y-4 p-4 bg-white rounded-lg shadow-sm">
-    @foreach ($productPrice as $price)
-        <div class="flex flex-col">
-            <div class="flex items-center justify-between">
-                <div class="text-gray-800 font-semibold">
-                    {{ $price['variant'] ?? 'Standard' }}
-                </div>
-                <div class="text-amber-700 font-serif text-lg font-medium">
-                    IDR {{ number_format($price['price'], 0, ',', '.') }} 
-                    <span class="text-sm font-normal text-gray-500">/ meter</span>
-                </div>
-            </div>
-            @if (!empty($price['moq']))
-                <div class="text-sm text-gray-500 mt-1">
-                    Min Order: {{ $price['moq'] }} meter{{ $price['moq'] > 1 ? 's' : '' }}
-                </div>
-            @endif
-        </div>
-    @endforeach
-</div>
+                        @foreach ($productPrice as $price)
+                            <div class="flex flex-col">
+                                <div class="flex items-center justify-between">
+                                    <div class="text-gray-800 font-semibold">
+                                        {{ $price['variant'] ?? 'Standard' }}
+                                    </div>
+                                    <div class="text-amber-700 font-serif text-lg font-medium">
+                                        IDR {{ number_format($price['price'], 0, ',', '.') }} 
+                                        <span class="text-sm font-normal text-gray-500">/ meter</span>
+                                    </div>
+                                </div>
+                                @if (!empty($price['moq']))
+                                    <div class="text-sm text-gray-500 mt-1">
+                                        Min Order: {{ $price['moq'] }} meter{{ $price['moq'] > 1 ? 's' : '' }}
+                                    </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
 
                     </div>
 
@@ -152,21 +152,21 @@
                             </button>
                             <div class="flex items-center justify-center space-x-3">
 
-    <span id="quantity" class="min-w-[2rem] text-center text-lg font-medium">1</span>
-    
-    <input type="hidden" name="quantity" id="hidden-quantity" value="1">
+                                <span id="quantity" class="min-w-[2rem] text-center text-lg font-medium">1</span>
+                                
+                                <input type="hidden" name="quantity" id="hidden-quantity" value="1">
 
-</div>
+                            </div>
 
                             <button type="button" class="px-3 py-2 text-gray-500 hover:bg-gray-100 transition-colors" id="increment">
                                 <span class="hi hi-plus inline-block h-5 w-5"> + </span>
                             </button>
                         </div>
-                        <button class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                        <button class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center" type="button" id="order-button">
                             <span class="hi hi-shopping-cart inline-block h-5"></span>
                             Buy Now
                         </button>
-                        <button class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                        <button class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center" type="button" id="collab-button">
                             <span class="hi hi-shopping-cart inline-block h-5"></span>
                             Request Collaboration
                         </button>
@@ -203,5 +203,15 @@
         quantitySpan.textContent = quantity;
         hiddenQuantityInput.value = quantity;
     });
+
+    const orderBtn = document.getElementById('order-button');
+    const collabBtn = document.getElementById('collab-button');
+
+    orderBtn.addEventListener('click', () => {
+        window.location.href = '{{ route("order.add") }}'.'?product_id='.'{{ $product->id }}'.'&quantity='.quantity;
+    })
+    collabBtn.addEventListener('click', () => {
+        window.location.href = '{{ route("order.custom") }}'.'?product_id='.'{{ $product->id }}'.'&quantity='.quantity;
+    })
 </script>
 @endsection

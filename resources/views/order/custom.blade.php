@@ -45,9 +45,8 @@ class="h-full md:h-3/4 max-h-[95vh] md:max-h-[80vh] w-full md:w-3/4 bg-white md:
                             id="product_id"
                             class="w-full border border-gray-300 rounded-lg px-3 py-2 flex items-center justify-between gap-2 transition duration-300 ease-in-out"
                         >
-                            <option value="" disabled selected>Select a product</option>
                             @foreach($products as $p)
-                                <option value="{{ $p['id'] }}" style="background-color: white; color: #333;">{{ $p['name'] }}</option>
+                            <option value="{{ $p['id'] }}" style="background-color: white; color: #333;" {{ $product_id === $p['id'] ? 'selected': null }} >{{ $p['name'] }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -61,7 +60,7 @@ class="h-full md:h-3/4 max-h-[95vh] md:max-h-[80vh] w-full md:w-3/4 bg-white md:
                             id="quantity"
                             class="w-full rounded-lg border-gray-300 focus:ring-opacity-50"
                             placeholder="Quantity"
-                            value="{{ old('quantity') }}"
+                            value="{{ old('quantity') ? old('quantity') : $quantity ? $quantity : 1 }}"
                             required
                         >
                         @error('quantity')
