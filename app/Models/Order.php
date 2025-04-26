@@ -16,7 +16,7 @@ class Order extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'description', 'quantity', 'total_price', 'status', 'payment_method', 'payment_status', 'address', 'comment', 'user_id', 'product_id', 'custom_design'];
+    protected $fillable = ['description', 'quantity', 'total_price',  'subtotal', 'price','shipping_cost', 'status', 'payment_method', 'payment_status', 'address', 'user_id', 'product_id', 'custom_design'];
 
     // protected $primaryKey = 'uuid';
     /**
@@ -24,7 +24,7 @@ class Order extends Model
      *
      * @var array<int, string>
      */
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['updated_at'];
 
     /**
      * The attributes that should be cast.
@@ -40,18 +40,20 @@ class Order extends Model
     public static function validationRules()
     {
         return [
-            'name' => 'required|string|max:50',
             'description' => 'required|string|max:255',
             'quantity' => 'required|integer',
             'total_price' => 'required|numeric',
-            'status' => 'nullable|string|max:50',
-            'payment_method' => 'nullable|string|max:50',
-            'payment_status' => 'nullable|string|max:50',
+            'status' => 'nullable|integer|max:50',
+            'payment_method' => 'nullable|integer|max:50',
+            'payment_status' => 'nullable|integer|max:50',
             'address' => 'nullable|string|max:255',
             'comment' => 'nullable|string|max:255',
             'user_id' => 'required|uuid',
             'product_id' => 'required|uuid',
             'custom_design' => 'nullable|string|max:255',
+            'shipping_cost' => 'nullable|integer',
+            'price' => 'nullable|integer',
+            'subtotal' => 'nullable|integer',
         ];
     }
 
@@ -64,9 +66,6 @@ class Order extends Model
     public static function validationMessages()
     {
         return [
-            'name.required' => 'Name is required',
-            'name.string' => 'Name must be a string',
-            'name.max' => 'Name must be less than 50 characters',
             'description.required' => 'Description is required',
             'description.string' => 'Description must be a string',
             'description.max' => 'Description must be less than 255 characters',
@@ -74,11 +73,11 @@ class Order extends Model
             'quantity.integer' => 'Quantity must be an integer',
             'total_price.required' => 'Total price is required',
             'total_price.numeric' => 'Total price must be a number',
-            'status.string' => 'Status must be a string',
+            'status.integer' => 'Status must be a integer',
             'status.max' => 'Status must be less than 50 characters',
-            'payment_method.string' => 'Payment method must be a string',
+            'payment_method.integer' => 'Payment method must be a integer',
             'payment_method.max' => 'Payment method must be less than 50 characters',
-            'payment_status.string' => 'Payment status must be a string',
+            'payment_status.integer' => 'Payment status must be a integer',
             'payment_status.max' => 'Payment status must be less than 50 characters',
             'address.string' => 'Address must be a string',
             'address.max' => 'Address must be less than 255 characters',
@@ -90,6 +89,9 @@ class Order extends Model
             'product_id.uuid' => 'Product ID must be a valid UUID',
             'custom_design.string' => 'Custom design must be a string',
             'custom_design.max' => 'Custom design must be less than 255 characters',
+            'shipping_cost.integer' => 'Shipping cost must be an integer',
+            'price.integer' => 'Price must be an integer',
+            'subtotal.integer' => 'Subtotal must be an integer',
         ];
     }
 
@@ -101,7 +103,6 @@ class Order extends Model
     public function resourceData($request)
     {
         return ModelUtils::filterNullValues([
-            'name' => $request->input('name'),
             'description' => $request->input('description'),
             'quantity' => $request->input('quantity'),
             'total_price' => $request->input('total_price'),
@@ -113,6 +114,9 @@ class Order extends Model
             'user_id' => $request->input('user_id'),
             'product_id' => $request->input('product_id'),
             'custom_design' => $request->input('custom_design'),
+            'shipping_cost' => $request->input('shipping_cost'),
+            'price' => $request->input('price'),
+            'subtotal' => $request->input('subtotal'),
         ]);
     }
 
