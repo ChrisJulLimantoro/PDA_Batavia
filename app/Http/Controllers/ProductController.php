@@ -19,6 +19,7 @@ class ProductController extends BaseController
         // Fetch categories excluding specific names
         $categories = Category::whereNotIn('name', ['Sumatera', 'Jawa', 'Bali', 'Kalimantan', 'Sulawesi', 'Papua', 'Nusa Tenggara', 'Maluku'])->get();
 
+        // dd($categories->toArray());
         // Fetch regions (Sumatera, Jawa, Bali, etc.)
         $origins = Category::whereIn('name', ['Sumatera', 'Jawa', 'Bali', 'Kalimantan', 'Sulawesi', 'Papua', 'Nusa Tenggara', 'Maluku'])->get();
 
@@ -107,7 +108,7 @@ class ProductController extends BaseController
         // Reset array keys
         $products = $products->values();
 
-        
+
 
         return response()->json($products);
     }
@@ -118,8 +119,8 @@ class ProductController extends BaseController
 
 
         $productPrice = json_decode($product->price, true);
-        
 
+        // dd($productPrice);
 
         return view('productDetail', compact('product', 'productPrice'));
     }

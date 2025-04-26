@@ -1,15 +1,17 @@
 <nav class="w-full px-6 py-3 bg-white md:shadow-md flex items-center justify-between fixed top-0 z-50 h-[6.2vh]">
-    <!-- Logo -->
+    <!-- Logo dengan redirect ke home -->
     <div class="flex items-center space-x-2">
-        <img src="{{ asset('appLogo.svg') }}" alt="App Logo" class="h-12 w-auto">
+        <a href="{{ route('home') }}">
+            <img src="{{ asset('appLogo.svg') }}" alt="App Logo" class="h-12 w-auto">
+        </a>
     </div>
+
 
     <!-- Desktop Navigation Links -->
     <div class="hidden md:flex items-center space-x-10 text-gray-800 text-lg">
         <a href="{{ route('home') }}" class="hover:text-orange-700">Home</a>
         <a href="" class="hover:text-orange-700">About Us</a>
         <a href="{{ route('products') }}" class="hover:text-orange-700">Products</a>
-        <a href="" class="hover:text-orange-700">Consult Your Idea</a>
     </div>
 
     <!-- Buttons -->
@@ -36,7 +38,6 @@
     <a href="/" class="hover:text-orange-700">Home</a>
     <a href="/about" class="hover:text-orange-700">About Us</a>
     <a href="/products" class="hover:text-orange-700">Products</a>
-    <a href="/consult" class="hover:text-orange-700">Consult Your Idea</a>
     <div class="flex flex-col space-y-2 pt-2 border-t">
         <button class="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
             Sign Up
