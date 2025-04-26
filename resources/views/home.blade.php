@@ -36,14 +36,14 @@
 
                                 <!-- Button Find Product -->
                                 <button type="submit"
-                                    class="flex items-center justify-center gap-2 h-10 bg-orange-600 hover:bg-amber-400 text-white px-4 rounded-full text-sm transition-all duration-300 hover:scale-[1.02]">
+                                    class="flex items-center justify-center md:gap-2 h-10 w-10 md:w-auto bg-orange-600 hover:bg-amber-500 text-white md:px-4 rounded-full text-sm transition-all duration-300 hover:scale-[1.02]">
                                     <x-heroicon-o-magnifying-glass class="h-5 w-5" />
-                                    <span>Find Product</span>
+                                    <span class="hidden md:block">Find Product</span>
                                 </button>
 
                                 <!-- Button Search by Image -->
                                 <button type="button" id="triggerImageSearch"
-                                    class="flex items-center justify-center h-10 w-10 bg-orange-600 hover:bg-orange-400 text-white rounded-full text-sm transition-all duration-300 hover:scale-[1.02]">
+                                    class="flex items-center justify-center h-10 w-10 bg-orange-600 hover:bg-amber-500 text-white rounded-full text-sm transition-all duration-300 hover:scale-[1.02]">
                                     <x-heroicon-o-camera class="h-5 w-5" />
                                 </button>
                             </div>

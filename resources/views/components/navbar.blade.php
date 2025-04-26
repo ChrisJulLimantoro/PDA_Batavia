@@ -34,10 +34,10 @@
 
 <!-- Mobile Menu (terpisah, hanya muncul di mobile) -->
 <div id="nav-menu"
-    class="hidden md:hidden flex flex-col space-y-4 bg-white px-6 py-4 mt-[72px] shadow-md fixed w-full top-0 z-40">
-    <a href="/" class="hover:text-orange-700">Home</a>
+    class="hidden md:hidden flex flex-col space-y-4 bg-white px-6 py-4 mt-[6.2vh] shadow-md fixed w-full top-0 z-40">
+    <a href="{{ route('home') }}" class="hover:text-orange-700">Home</a>
     <a href="/about" class="hover:text-orange-700">About Us</a>
-    <a href="/products" class="hover:text-orange-700">Products</a>
+    <a href="{{ route('products') }}" class="hover:text-orange-700">Products</a>
     <div class="flex flex-col space-y-2 pt-2 border-t">
         <button class="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm py-2 px-4 rounded">
             Sign Up
@@ -49,15 +49,33 @@
 </div>
 
 <script>
+    // Get the current path of the page
     const path = window.location.pathname;
+
+    // Select all anchor tags in the navigation
     const links = document.querySelectorAll('nav a, #nav-menu a');
 
+    // Function to clean the URL path (remove trailing slashes)
+    const cleanPath = (url) => {
+        return url.endsWith('/') ? url.slice(0, -1) : url;
+    };
+
+    // Loop through each link
     links.forEach(link => {
-        if (link.getAttribute('href') === path) {
+        // Get the href of the link and clean it
+        const linkHref = cleanPath(link.getAttribute('href'));
+
+        // Compare the cleaned href of the link with the current path
+        if (cleanPath(path) === linkHref) {
+            // Add classes to underline the active link
             link.classList.add('border-b-2', 'border-orange-600', 'pb-1');
+            link.classList.remove('hover:text-orange-700'); // Remove hover effect to show underline
+        } else {
+            link.classList.add('hover:text-orange-700'); // Add hover effect for non-active links
         }
     });
 
+    // Toggle mobile menu visibility
     const menuBtn = document.getElementById('menu-btn');
     const navMenu = document.getElementById('nav-menu');
 
