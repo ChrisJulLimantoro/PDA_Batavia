@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ProductController extends BaseController
 {
@@ -121,5 +122,82 @@ class ProductController extends BaseController
 
 
         return view('productDetail', compact('product', 'productPrice'));
+    }
+
+    // RETURN CATEGORY
+    public function searchByImage(Request $request)
+    {
+        $image = $request->file('image');
+
+        // Validate the image
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Fetch API
+        $result = Http::attach('file', file_get_contents($image), 'image.jpg')
+            ->post('http://0.0.0.0:8000/predict');
+        $response = json_decode($result->body(), true);
+        dd($response);
+        return response()->json(['message' => 'Image processed successfully']);
+    }
+
+    // Return PRODUCT ID
+    public function searchByGemini(Request $request)
+    {
+        $search = $request->input('search');
+        $apiKey = env('GEMINI_API_KEY'); // Save your API Key in .env file
+        $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$apiKey;
+
+        // Validate the search input
+        $request->validate([
+            'search' => 'required|string|max:255',
+        ]);
+        $products = $this->model->select('id', 'name', 'description')->get();
+        $products = $products->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'description' => $product->description,
+            ];
+        });
+
+        $prompt = "
+        I will provide a list of item names and descriptions for different kinds of batik, a
+            traditional cloth from Indonesia. I will also provide a prompt containing what a
+            user would like to create using the app. Based on those 2 prompts, give me a
+            json list of ids of items that might suit the user's needs. [ONLY RETURN THE LIST OF IDS, DO NOT RETURN ANY OTHER TEXT]
+            Below is the dataset:
+            ".json_encode($products)."
+
+            Here is the prompt:
+            ".$search;
+        // dd($prompt);
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+        ])->post($endpoint, [
+            'contents' => [
+                [
+                    'parts' => [
+                        [
+                            'text' => $prompt
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+        $responseBody = json_decode($response->body(), true);
+
+        // Access the candidates and the text field containing the JSON
+        $jsonString = $responseBody['candidates'][0]['content']['parts'][0]['text'];
+
+        // Remove the triple backticks (if necessary)
+        $jsonString = trim($jsonString, "```");
+
+        // Decode the JSON string
+        $decodedJson = json_decode($jsonString, true);
+
+        return response()->json($decodedJson);
     }
 }
