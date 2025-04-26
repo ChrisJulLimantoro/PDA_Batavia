@@ -1,5 +1,4 @@
 @extends('layout')
-<style src="{{ asset('css/home.css') }}"></style>
 @section('content')
 <div class="w-full max-w-screen-2xl mx-auto px-4 sm:px-8 font-inria bg-white text-gray-800">
 
@@ -24,10 +23,10 @@
                             type="text"
                             name="query"
                             placeholder="Discover our collection..."
-                            class="w-full px-6 py-5 pr-40 rounded-full border-0 focus:ring-2 focus:ring-amber-400 text-lg shadow-xl bg-white/95 backdrop-blur-sm placeholder-gray-400 font-light tracking-wide">
+                            class="w-full px-4 py-3 pr-40 rounded-full border-0 focus:ring-2 focus:ring-amber-400 text-lg shadow-xl bg-white/95 backdrop-blur-sm placeholder-gray-400 font-light tracking-wide">
                         <button
                             type="submit"
-                            class="absolute right-2 bg-orange-500 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-medium tracking-wide transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02]">
+                            class="absolute right-2 bg-orange-500 hover:bg-amber-700 text-white px-2 py-2 rounded-full font-medium tracking-wide transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02]">
                             Find Product
                         </button>
                     </div>
@@ -63,7 +62,7 @@
         </div>
     </div>
 
-    <div class="bg-gray-50 py-16 md:py-24 px-4 sm:px-6">
+    <div class="bg-gray-50 md:py-24 px-4 sm:px-6 opacity-0 md:opacity-100">
         <div class="container mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-light mb-4">Textile Regions of Indonesia</h2>
@@ -71,7 +70,7 @@
                 <div class="w-20 h-px bg-amber-500 mx-auto mt-6"></div>
             </div>
             
-            <div class="relative w-full max-w-5xl mx-auto bg-white p-8 rounded-xl shadow-sm">
+            <div class="relative w-full max-w-5xl mx-auto p-8 rounded-xl ">
                 <div class="map-container relative">
                     <div id="map-tooltip" class="absolute bg-gray-900 text-white px-3 py-2 rounded text-sm pointer-events-none opacity-0 transition-opacity"></div>
                     <object data="{{ asset('images/indonesia.svg') }}" type="image/svg+xml" class="w-full h-auto">
@@ -82,7 +81,7 @@
         </div>
     </div>
 
-    <div class="relative w-full h-[28rem] md:h-[36rem] overflow-hidden group">
+    <div class="relative w-full h-[32rem] md:h-[36rem] overflow-hidden group">
         <div class="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-gray-900/30 z-0 transition-all duration-700 group-hover:opacity-90"></div>
         <img src="{{ asset('images/banner2.png') }}" alt="Artisan at work" class="w-full h-full object-cover object-center transition-all duration-1000 ease-in-out group-hover:scale-105">
         
@@ -126,9 +125,8 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <button class="p-2 bg-white/90 rounded-full shadow-md hover:bg-amber-500 hover:text-white transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
+                        <x-heroicon-o-heart class="h-5 w-5" />
+
                         </button>
                     </div>
                 </div>
@@ -155,7 +153,7 @@
 
     <div class="container mx-auto px-4 sm:px-6 py-16 md:py-24">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">
-            <div class="relative h-[28rem] md:h-[36rem] rounded-xl overflow-hidden shadow-lg group">
+            <div class="relative h-[32rem] md:h-[36rem] rounded-xl overflow-hidden shadow-lg group">
                 <img 
                     src="{{ asset('images/kain_songket_palembang.jpg') }}" 
                     alt="Artisan at work"
@@ -175,7 +173,7 @@
                 </div>
             </div>
             
-            <div class="relative flex flex-col justify-between bg-gray-50 rounded-xl p-8 md:p-10 h-[28rem] md:h-[36rem] overflow-hidden">
+            <div class="relative flex flex-col justify-between bg-gray-50 rounded-xl p-8 md:p-10 h-[52rem] md:h-[36rem] overflow-hidden">
                 <div class="absolute -right-20 -top-20 w-64 h-64 bg-amber-100 rounded-full opacity-10"></div>
                 <div class="absolute -left-10 -bottom-10 w-48 h-48 bg-amber-200 rounded-full opacity-10"></div>
                 
@@ -190,21 +188,19 @@
                 </div>
 
                 <div class="relative z-10 mt-8">
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
                             <div class="text-amber-500 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                            <x-heroicon-o-check-circle class="h-8 w-8" />
+
                             </div>
                             <h4 class="font-medium mb-2">Authentic Techniques</h4>
                             <p class="text-sm text-gray-500">Traditional methods preserved for generations</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
                             <div class="text-amber-500 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
+                            <x-heroicon-o-bolt class="h-8 w-8" />
+
                             </div>
                             <h4 class="font-medium mb-2">Natural Materials</h4>
                             <p class="text-sm text-gray-500">Using organic dyes and premium fibers</p>
