@@ -15,26 +15,54 @@ class VendorSeeder extends Seeder
     {
         $vendors = [
             [
-                'name' => 'Desa Gampong Drien',
+                'name' => 'Desa Paksebali',
                 'description' => '-',
-                'address' => 'Gampong Drien, Kecamatan Peukan Bada, Kabupaten Aceh Besar',
-                'phone' => '0812-1234-5678',
-                'email' => 'gampongdrien@gmail.com',
+                'address' => 'BUM Desa Paksebali',
+                'phone' => '0812-1234-3748',
+                'email' => 'paksebali@gmail.com',
             ],
             [
-                'name' => 'Desa Darul Ikhsan',
+                'name' => 'Desa Cempaga',
                 'description' => '-',
-                'address' => 'Darul Ikhsan, Kecamatan Peukan Bada, Kabupaten Aceh Besar',
+                'address' => 'BUM Desa Bersama Bali Aga',
                 'phone' => '0812-1234-5678',
-                'email' => 'darulikh@gmail.com',
+                'email' => 'baliaga@gmail.com',
             ],
             [
-                'name' => 'Desa Gampong Baro',
+                'name' => 'Desa Tanjuang Balik',
                 'description' => '-',
-                'address' => 'Gampong Baro, Kecamatan Peukan Bada, Kabupaten Aceh Besar',
-                'phone' => '0812-1234-5678',
-                'email' => 'gampongbaro@gmail.com',
-            ]
+                'address' => 'BUM Desa Bangun Tanjuang Jaya Tanjuang Balik',
+                'phone' => '0812-1234-2370',
+                'email' => 'tanjuangjaya@gmail.com',
+            ],
+            [
+                'name' => 'Desa Simpang Sugiran',
+                'description' => '-',
+                'address' => 'BUM Desa Zigiran Mandiri Simpang Sugiran',
+                'phone' => '0812-1234-2370',
+                'email' => 'tanjuangjaya@gmail.com',
+            ],
+            [
+                'name' => 'Desa Pabuaran Lor',
+                'description' => '-',
+                'address' => 'BUM Desa Rajawali Pabuaran Lor',
+                'phone' => '0812-2343-2370',
+                'email' => 'pbl@gmail.com',
+            ],
+            [
+                'name' => 'Desa Kemurang Wetan',
+                'description' => '-',
+                'address' => 'BUM Desa Rajawali Kemurang Wetan',
+                'phone' => '0812-1234-2123',
+                'email' => 'rjsdkj@gmail.com',
+            ],
+            [
+                'name' => 'Desa Cantuk',
+                'description' => '-',
+                'address' => 'BUM Desa Rajawali Cantuk',
+                'phone' => '0812-1234-2321',
+                'email' => 'cnths@gmail.com',
+            ],
         ];
 
         foreach ($vendors as $vendor) {
