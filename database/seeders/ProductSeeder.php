@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Vendor;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class ProductSeeder extends Seeder
 {
@@ -399,19 +398,19 @@ class ProductSeeder extends Seeder
             ],
         ];
         foreach ($products as $product) {
-            Product::create($product);
-        }
+            $product = Product::create($product);
 
-        // Attach random categories to the product
-        $randomCategories = $faker->randomElements($categories, $faker->numberBetween(1, 2));
-        $categoriesToAttach = Category::whereIn('name', $randomCategories)->get();
-        $product->categories()->attach($categoriesToAttach->pluck('id'));
+            // Attach random categories to the product
+            $randomCategories = $faker->randomElements($categories, $faker->numberBetween(1, 2));
+            $categoriesToAttach = Category::whereIn('name', $randomCategories)->get();
+            $product->categories()->attach($categoriesToAttach->pluck('id'));
 
-        // Attach origin as a category too
-        $randomOrigin = $faker->randomElement($origins);
-        $originCategory = Category::where('name', $randomOrigin)->first();
-        if ($originCategory) {
-            $product->categories()->attach($originCategory->id);
+            // Attach origin as a category too
+            $randomOrigin = $faker->randomElement($origins);
+            $originCategory = Category::where('name', $randomOrigin)->first();
+            if ($originCategory) {
+                $product->categories()->attach($originCategory->id);
+            }
         }
     }
 }

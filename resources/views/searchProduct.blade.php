@@ -1,25 +1,32 @@
 @extends('layout')
 
 @section('styles')
-    <title>Search Product</title>
+    <title>Product Search</title>
 @endsection()
 
 @section('content')
-    <div
-        class="flex flex-col md:flex-row h-full w-full md:w-11/12 mx-auto bg-white md:rounded-lg shadow-sm md:my-16 overflow-hidden">
-        <!-- Sidebar Filter -->
-        <aside class="w-full md:w-1/4 bg-gray-50 border-r border-gray-200 p-4">
-            <h2 class="text-lg font-semibold mb-4">Filters</h2>
+    <div class="flex flex-col md:flex-row bg-white h-screen w-full overflow-hidden">
+
+        <!-- Sidebar Filter (Toggleable on Mobile) -->
+        <aside
+            class="w-full md:w-1/4 bg-gray-50 border-r border-gray-200 p-6 md:block md:overflow-y-auto transition-all duration-300 ease-in-out transform md:translate-x-0"
+            id="sidebar">
+            <div class="flex justify-between items-center mb-4">
+                <button id="toggle-sidebar" class="text-xl text-gray-700 hover:text-pink-600">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Filters</h2>
 
             <!-- Category Filter (Material) -->
             <div class="mb-6">
-                <h3 class="text-md font-bold mb-2">Material Category</h3>
+                <h3 class="text-md font-bold mb-2 text-gray-700">Material Category</h3>
                 <div class="flex flex-col space-y-2">
                     @foreach ($categories as $category)
-                        <label class="inline-flex items-center">
-                            <input type="checkbox" class="form-checkbox text-pinkDark" value="{{ $category->id }}"
+                        <label class="inline-flex items-center text-gray-600 hover:text-pink-600">
+                            <input type="checkbox" class="form-checkbox text-pink-600" value="{{ $category->id }}"
                                 data-filter="category">
-                            <span class="ml-2 text-sm text-gray-700">{{ $category->name }}</span>
+                            <span class="ml-2 text-sm">{{ $category->name }}</span>
                         </label>
                     @endforeach
                 </div>
@@ -27,13 +34,13 @@
 
             <!-- Category Filter (Origin) -->
             <div class="mb-6">
-                <h3 class="text-md font-bold mb-2">Origin</h3>
+                <h3 class="text-md font-bold mb-2 text-gray-700">Origin</h3>
                 <div class="flex flex-col space-y-2">
                     @foreach ($origins as $origin)
-                        <label class="inline-flex items-center">
-                            <input type="checkbox" class="form-checkbox text-pinkDark" value="{{ $origin->id }}"
+                        <label class="inline-flex items-center text-gray-600 hover:text-pink-600">
+                            <input type="checkbox" class="form-checkbox text-pink-600" value="{{ $origin->id }}"
                                 data-filter="origin">
-                            <span class="ml-2 text-sm text-gray-700">{{ $origin->name }}</span>
+                            <span class="ml-2 text-sm">{{ $origin->name }}</span>
                         </label>
                     @endforeach
                 </div>
@@ -41,10 +48,10 @@
 
             <!-- Price Range Filter -->
             <div class="mb-6">
-                <h3 class="text-md font-bold mb-2">Price Range</h3>
+                <h3 class="text-md font-bold mb-2 text-gray-700">Price Range</h3>
                 <input type="range" id="priceRange" name="priceRange" min="{{ $minPrice }}" max="{{ $maxPrice }}"
                     value="{{ $maxPrice }}"
-                    class="w-full h-2 bg-pink-300 rounded-full appearance-none focus:outline-none">
+                    class="w-full h-2 bg-gray-200 rounded-full appearance-none focus:outline-none">
                 <div class="flex justify-between text-sm text-gray-700">
                     <span>IDR {{ number_format($minPrice, 0, ',', '.') }}</span>
                     <span id="priceLabel">IDR {{ number_format($maxPrice, 0, ',', '.') }}</span>
@@ -53,11 +60,17 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="w-full md:w-3/4 p-4 overflow-y-auto">
+        <main class="w-full md:w-3/4 p-6 overflow-y-auto">
+            <!-- Header -->
+            <header class="mb-6">
+                <h1 class="text-3xl font-bold text-gray-900">Product Search</h1>
+                <p class="text-gray-600">Find the best materials based on your preferences.</p>
+            </header>
+
             <!-- Search Bar -->
             <div class="mb-4">
                 <input type="text" name="search" id="search" placeholder="Search products..."
-                    class="w-full rounded-lg border-gray-300 focus:border-pinkDark focus:ring focus:ring-pinkDark focus:ring-opacity-50 px-4 py-2">
+                    class="w-full rounded-lg border-gray-300 focus:border-pink-600 focus:ring focus:ring-pink-600 focus:ring-opacity-50 px-4 py-2">
             </div>
 
             <!-- Result Count -->
@@ -73,11 +86,19 @@
             </div>
         </main>
     </div>
-@endsection()
+@endsection
 
 @section('script')
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script>
+        // Sidebar toggle functionality
+        const toggleButton = document.getElementById('toggle-sidebar');
+        const sidebar = document.getElementById('sidebar');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('transform'); // Toggle sidebar visibility
+            sidebar.classList.toggle('-translate-x-full'); // Hide sidebar on mobile
+        });
+
         $(document).ready(function() {
             let allProducts = [];
 
@@ -137,9 +158,8 @@
                                     <div class="flex flex-wrap gap-2 mb-4">
                                         ${product.categories.map(cat => `<span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">${cat.name}</span>`).join('')}
                                     </div>
-                                    <div class="text-sm text-gray-600 mb-2"><strong>Origin: </strong>${product.origin}</div>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                        Deskripsi produk belum tersedia.
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
+                                        ${product.description}
                                     </p>
                                 </div>
                                 <div class="mt-4">

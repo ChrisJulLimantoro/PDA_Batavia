@@ -63,16 +63,16 @@
 
 </head>
 
-<body class="p-0 m-0 overflow-hidden h-screen font-asap relative">
+<body class="p-0 m-0 overflow-auto h-screen font-asap relative">
 
     {{-- Navbar --}}
     @include('components.navbar')
 
-    <div class="w-full h-full justify-center items-center flex flex-col bg-transparent mt-10">
+    <div class="w-full h-full justify-center items-center flex flex-col bg-transparent mt-[6.2vh]">
         @yield('content')
     </div>
 
-    @yield('scripts')
+    @yield('script')
 </body>
 
 </html>
