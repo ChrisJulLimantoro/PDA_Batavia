@@ -4,7 +4,7 @@
 @endsection()
 @section('content')
 <div
-    class="h-full md:h-3/4 max-h-[90vh] md:max-h-[70vh] w-full md:w-3/4 bg-white md:rounded-lg shadow-sm md:my-16 overflow-scroll bg-white"
+    class="h-full md:h-3/4 max-h-[95vh] md:max-h-[80vh] w-full md:w-3/4 bg-white md:rounded-lg overflow-scroll bg-white shadow-xl"
 >  
         <!-- Title Stepper OnBoarding Step -->
 		<div class="grid grid-cols-2 py-4 md:py-6">
@@ -148,6 +148,8 @@
 @endsection()
 @section('script')
     <script>
+        // $(document).ready(function(){
 
+        // })
     </script>
 @endsection()

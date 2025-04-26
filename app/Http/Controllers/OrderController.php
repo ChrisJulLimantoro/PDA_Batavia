@@ -33,6 +33,17 @@ class OrderController extends BaseController
     public function add(Request $request)
     {
         $data = $request->only(['product_id', 'quantity', 'address', 'description']);
+        // Validate the data
+        $valid = Validator::make($data, [
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+            'address' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
+        if ($valid->fails()) {
+            return redirect()->back()->withErrors($valid->errors())->withInput();
+        }
+
         // Calculate the total price
         $product = Product::find($data['product_id']);
         $prices = json_decode($product->price, true);
@@ -67,7 +78,7 @@ class OrderController extends BaseController
     {
         $data = $request->session()->all();
         // If even one session data not found redirect to add view
-        if (empty($data['product_id']) || empty($data['quantity']) || empty($data['address']) || empty($data['description']) || empty($data['subtotal']) || empty($data['shipping_cost']) || empty($data['price']) || empty($data['total_price'])) {
+        if (empty($data['product_id']) || empty($data['quantity']) || empty($data['address']) || empty($data['subtotal']) || empty($data['shipping_cost']) || empty($data['price']) || empty($data['total_price'])) {
             return redirect()->route('order.add');
         }
         // Get Product

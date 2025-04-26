@@ -1,7 +1,7 @@
 <nav class="w-full px-6 py-3 bg-white md:shadow-md flex items-center justify-between fixed top-0 z-50 h-[6.2vh]">
     <!-- Logo -->
     <div class="flex items-center space-x-2">
-        <img src="appLogo.svg" alt="App Logo" class="h-12 w-auto">
+        <img src="{{ asset('appLogo.svg') }}" alt="App Logo" class="h-12 w-auto">
     </div>
 
     <!-- Desktop Navigation Links -->
