@@ -10,3 +10,6 @@ Route::get('/', function () {
 
 Route::get('/login', [UserController::class, 'loginView'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login.post');
+
+// Order
+Route::get('/order/add', [\App\Http\Controllers\OrderController::class, 'addView'])->name('order.add');

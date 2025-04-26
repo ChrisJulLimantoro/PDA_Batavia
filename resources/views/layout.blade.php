@@ -72,10 +72,7 @@
 <body class="p-0 m-0 overflow-hidden h-screen font-asap relative">
 
     {{-- Baymax --}}
-    <div class="w-full h-full"></div>
-    <div class="w-full h-1/4"></div>
-    <div class="container absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto text-center flex flex-col justify-center"
-        style="z-index: 1;">
+    <div class="w-full h-full justify-center items-center flex flex-col bg-transparent">
         @yield('content')
     </div>
 

@@ -74,16 +74,16 @@
             method="POST" id="login-form">
             @csrf
             {{-- Form Username / Email --}}
-            <div class="flex flex-col" 
-                <label for="email" class="text-white font-asap text-sm xl:text-lg text-start">Username / Email</label>
+            <div class="flex flex-col" >
+                <label for="email" class="text-white text-sm xl:text-lg text-start">Username / Email</label>
                 <input type="text" name="email" id="email"
                     class="w-full h-10 rounded-lg bg-white border-2 border-gray-300 focus:outline-none focus:border-[#755eb0] px-3"
                     placeholder="Username / Email" required value="{{ old('email') }}">
             </div>
             
             {{-- Form Password --}}
-            <div class="flex flex-col mt-4" 
-                <label for="password" class="text-white font-asap text-sm xl:text-lg text-start">Password</label>
+            <div class="flex flex-col mt-4" >
+                <label for="password" class="text-white text-sm xl:text-lg text-start">Password</label>
                 <input type="password" name="password" id="password"
                     class="w-full h-10 rounded-lg bg-white border-2 border-gray-300 focus:outline-none focus:border-[#755eb0] px-3"
                     placeholder="Password" required value="{{ old('password') }}">

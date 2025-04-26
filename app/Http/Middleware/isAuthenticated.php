@@ -15,6 +15,9 @@ class isAuthenticated
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if(!session('user_id')){
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
         return $next($request);
     }
 }

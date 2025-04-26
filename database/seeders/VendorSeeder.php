@@ -40,7 +40,7 @@ class VendorSeeder extends Seeder
                 'description' => '-',
                 'address' => 'BUM Desa Zigiran Mandiri Simpang Sugiran',
                 'phone' => '0812-1234-2370',
-                'email' => 'tanjuangjaya@gmail.com',
+                'email' => 'zigiranmandiri@gmail.com',
             ],
             [
                 'name' => 'Desa Pabuaran Lor',
