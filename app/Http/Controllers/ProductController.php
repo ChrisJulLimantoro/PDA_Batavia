@@ -106,6 +106,8 @@ class ProductController extends BaseController
         // Reset array keys
         $products = $products->values();
 
+        
+
         return response()->json($products);
     }
 
@@ -113,8 +115,10 @@ class ProductController extends BaseController
     {
         $product = Product::findOrFail($id);
 
-        // Decode the price JSON
+
         $productPrice = json_decode($product->price, true);
+        
+
 
         return view('productDetail', compact('product', 'productPrice'));
     }

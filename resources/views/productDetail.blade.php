@@ -112,16 +112,27 @@
 
                     <div class="mb-8">
                         <h3 class="text-sm font-medium text-gray-500 mb-2">PRICING</h3>
-                        <div class="price-tag p-4 rounded-lg">
-                            @foreach ($productPrice as $price)
-                            <div class="flex justify-between items-center mb-2 last:mb-0">
-                                <span class="text-gray-700">{{ $price['variant'] ?? 'Standard' }}</span>
-                                <span class="text-lg font-serif font-medium text-amber-700">
-                                    IDR {{ number_format($price['price'], 0, ',', '.') }} / meter
-                                </span>
-                            </div>
-                            @endforeach
-                        </div>
+                        <div class="space-y-4 p-4 bg-white rounded-lg shadow-sm">
+    @foreach ($productPrice as $price)
+        <div class="flex flex-col">
+            <div class="flex items-center justify-between">
+                <div class="text-gray-800 font-semibold">
+                    {{ $price['variant'] ?? 'Standard' }}
+                </div>
+                <div class="text-amber-700 font-serif text-lg font-medium">
+                    IDR {{ number_format($price['price'], 0, ',', '.') }} 
+                    <span class="text-sm font-normal text-gray-500">/ meter</span>
+                </div>
+            </div>
+            @if (!empty($price['moq']))
+                <div class="text-sm text-gray-500 mt-1">
+                    Min Order: {{ $price['moq'] }} meter{{ $price['moq'] > 1 ? 's' : '' }}
+                </div>
+            @endif
+        </div>
+    @endforeach
+</div>
+
                     </div>
 
                     <div class="mb-8">
@@ -136,25 +147,28 @@
 
                     <div class="flex space-x-4">
                         <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden">
-                            <button class="px-3 py-2 text-gray-500 hover:bg-gray-100 transition-colors">
-                                <span class="hi hi-minus inline-block h-5 w-5"></span>
+                            <button type="button" id="decrement" class="px-3 py-2 text-gray-500 hover:bg-gray-100 transition-colors">
+                                <span class="hi hi-minus inline-block h-5 w-5">-</span>
                             </button>
-                            <div x-data="{ quantity: 1 }" class="flex items-center space-x-4">
-                                <button type="button" @click="if (quantity > 1) quantity--" class="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400">
-                                    -
-                                </button>
-                                <span class="px-4 py-2">{{ quantity }}</span>
-                                <button type="button" @click="quantity++" class="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400">
-                                    +
-                                </button>
-                            </div>
-                            <button class="px-3 py-2 text-gray-500 hover:bg-gray-100 transition-colors">
-                                <span class="hi hi-plus inline-block h-5 w-5"></span>
+                            <div class="flex items-center justify-center space-x-3">
+
+    <span id="quantity" class="min-w-[2rem] text-center text-lg font-medium">1</span>
+    
+    <input type="hidden" name="quantity" id="hidden-quantity" value="1">
+
+</div>
+
+                            <button type="button" class="px-3 py-2 text-gray-500 hover:bg-gray-100 transition-colors" id="increment">
+                                <span class="hi hi-plus inline-block h-5 w-5"> + </span>
                             </button>
                         </div>
                         <button class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
-                            <span class="hi hi-shopping-cart inline-block h-5 w-5 mr-2"></span>
+                            <span class="hi hi-shopping-cart inline-block h-5"></span>
                             Buy Now
+                        </button>
+                        <button class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                            <span class="hi hi-shopping-cart inline-block h-5"></span>
+                            Request Collaboration
                         </button>
                     </div>
                 </div>
@@ -168,4 +182,26 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+<script src="{{ asset('js/productDetail-animation.js') }}"></script>
+<script>
+    const decrementBtn = document.getElementById('decrement');
+    const incrementBtn = document.getElementById('increment');
+    const quantitySpan = document.getElementById('quantity');
+    const hiddenQuantityInput = document.getElementById('hidden-quantity');
+    let quantity = 1;
+
+    decrementBtn.addEventListener('click', () => {
+        if (quantity > 1) {
+            quantity--;
+            quantitySpan.textContent = quantity;
+            hiddenQuantityInput.value = quantity;
+        }
+    });
+
+    incrementBtn.addEventListener('click', () => {
+        quantity++;
+        quantitySpan.textContent = quantity;
+        hiddenQuantityInput.value = quantity;
+    });
+</script>
 @endsection
