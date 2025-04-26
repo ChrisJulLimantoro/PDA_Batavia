@@ -52,6 +52,12 @@ class UserController extends BaseController
         // Set Session to be logged in with the user_id
         $request->session()->put('user_id', $checkE->id);
         $request->session()->put('user_name', $checkE->name);
-        return redirect()->route('order.add');
+        return redirect()->intended(route('order.add'));
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect()->route('home');
     }
 }
