@@ -8,7 +8,7 @@
     <div class="hidden md:flex items-center space-x-10 text-gray-800 text-lg">
         <a href="/batavia" class="hover:text-orange-700">Home</a>
         <a href="/about" class="hover:text-orange-700">About Us</a>
-        <a href="/products" class="hover:text-orange-700">Products</a>
+        <a href="/batavia/products" class="hover:text-orange-700">Products</a>
         <a href="/consult" class="hover:text-orange-700">Consult Your Idea</a>
     </div>
 

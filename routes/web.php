@@ -24,3 +24,4 @@ Route::post('/order/custom', [OrderController::class, 'customSave'])->name('orde
 // Search
 Route::get('/products', [ProductController::class, 'index'])->name('search');
 Route::get('/getProducts', [ProductController::class, 'getProducts'])->name('products.get');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show');

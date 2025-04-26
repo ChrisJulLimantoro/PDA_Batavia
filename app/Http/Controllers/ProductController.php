@@ -109,4 +109,13 @@ class ProductController extends BaseController
         return response()->json($products);
     }
 
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+
+        // Decode the price JSON
+        $productPrice = json_decode($product->price, true);
+
+        return view('productDetail', compact('product', 'productPrice'));
+    }
 }

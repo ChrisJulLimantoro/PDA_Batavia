@@ -149,18 +149,17 @@
                     html += `
                         <div class="flex flex-col md:flex-row bg-white rounded-lg shadow p-4 gap-6 border">
                             <div class="w-full md:w-1/3 h-48 overflow-hidden flex items-center justify-center">
-                                <img src="${product.image}" alt="${product.name}"
-                                    class="object-cover h-full w-full rounded-md">
+                                <img src="${product.image}" alt="${product.name}" class="object-cover h-full w-full rounded-md">
                             </div>
                             <div class="w-full md:w-2/3 flex flex-col justify-between">
                                 <div>
-                                    <h2 class="text-xl font-bold text-gray-900 mb-2">${product.name}</h2>
+                                    <h2 class="text-xl font-bold text-gray-900 mb-2">
+                                        <a href="products/${product.id}">${product.name}</a>
+                                    </h2>
                                     <div class="flex flex-wrap gap-2 mb-4">
                                         ${product.categories.map(cat => `<span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">${cat.name}</span>`).join('')}
                                     </div>
-                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
-                                        ${product.description}
-                                    </p>
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">${product.description}</p>
                                 </div>
                                 <div class="mt-4">
                                     <p class="text-md font-semibold text-gray-900">

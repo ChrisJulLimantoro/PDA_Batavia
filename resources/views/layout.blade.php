@@ -63,7 +63,7 @@
 
 </head>
 
-<body class="p-0 m-0 overflow-auto h-screen font-asap relative">
+<body class="p-0 m-0 overflow-auto h-screen font-inria relative">
 
     {{-- Navbar --}}
     @include('components.navbar')
