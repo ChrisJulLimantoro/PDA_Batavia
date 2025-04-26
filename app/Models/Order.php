@@ -16,7 +16,7 @@ class Order extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['description', 'quantity', 'total_price',  'subtotal', 'price','shipping_cost', 'status', 'payment_method', 'payment_status', 'address', 'user_id', 'product_id', 'custom_design'];
+    protected $fillable = ['description', 'quantity', 'total_price',  'subtotal','tax', 'price','shipping_cost', 'status', 'payment_method', 'payment_status', 'address', 'user_id', 'product_id', 'custom_design'];
 
     // protected $primaryKey = 'uuid';
     /**
@@ -46,6 +46,7 @@ class Order extends Model
             'status' => 'nullable|integer|max:50',
             'payment_method' => 'nullable|integer|max:50',
             'payment_status' => 'nullable|integer|max:50',
+            'tax' => 'nullable|integer',
             'address' => 'nullable|string|max:255',
             'comment' => 'nullable|string|max:255',
             'user_id' => 'required|uuid',
@@ -92,6 +93,7 @@ class Order extends Model
             'shipping_cost.integer' => 'Shipping cost must be an integer',
             'price.integer' => 'Price must be an integer',
             'subtotal.integer' => 'Subtotal must be an integer',
+            'tax.integer' => 'Tax must be an integer',
         ];
     }
 
@@ -117,6 +119,7 @@ class Order extends Model
             'shipping_cost' => $request->input('shipping_cost'),
             'price' => $request->input('price'),
             'subtotal' => $request->input('subtotal'),
+            'tax' => $request->input('tax'),
         ]);
     }
 

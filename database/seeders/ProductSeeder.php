@@ -398,19 +398,20 @@ class ProductSeeder extends Seeder
             ],
         ];
         foreach ($products as $product) {
-            $product = Product::create($product);
+            $prod = Product::create($product);
+            
 
-            // Attach random categories to the product
-            $randomCategories = $faker->randomElements($categories, $faker->numberBetween(1, 2));
-            $categoriesToAttach = Category::whereIn('name', $randomCategories)->get();
-            $product->categories()->attach($categoriesToAttach->pluck('id'));
+        // Attach random categories to the product
+        $randomCategories = $faker->randomElements($categories, $faker->numberBetween(1, 2));
+        $categoriesToAttach = Category::whereIn('name', $randomCategories)->get();
+        $prod->categories()->attach($categoriesToAttach->pluck('id'));
 
-            // Attach origin as a category too
-            $randomOrigin = $faker->randomElement($origins);
-            $originCategory = Category::where('name', $randomOrigin)->first();
-            if ($originCategory) {
-                $product->categories()->attach($originCategory->id);
-            }
+        // Attach origin as a category too
+        $randomOrigin = $faker->randomElement($origins);
+        $originCategory = Category::where('name', $randomOrigin)->first();
+        if ($originCategory) {
+            $prod->categories()->attach($originCategory->id);
         }
+    }
     }
 }

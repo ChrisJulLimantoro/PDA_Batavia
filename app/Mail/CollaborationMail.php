@@ -30,7 +30,7 @@ class CollaborationMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Konfirmasi Kehadiran ' . $this->data['event'] . ' - Welcome, Grateful Generation 2025',
+            subject: 'Batavia Collaboration Confirmation - ' . $this->data->user->name,
         );
     }
 
@@ -40,20 +40,7 @@ class CollaborationMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.rsvp',
+            markdown: 'mail.collaboration',
         );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        $array = [];
-        $array[] = Attachment::fromStorageDisk('public', 'attachment/peraturan_raplen_compressed.pdf')->withMime('application/pdf')->as('PERATURAN RAPAT PLENO WGG 2024.pdf');
-
-        return $array;
     }
 }
