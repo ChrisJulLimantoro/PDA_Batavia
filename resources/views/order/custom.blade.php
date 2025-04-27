@@ -9,23 +9,20 @@
     </style>
 @endsection()
 @section('content')
-<div
-class="h-full md:h-3/4 max-h-full md:max-h-[80vh] w-full md:w-3/4 bg-white md:rounded-lg overflow-scroll bg-white shadow-xl mt-0 md:mt-16"
->  
+    <div
+        class="h-full md:h-3/4 max-h-full md:max-h-[80vh] w-full md:w-3/4 bg-white md:rounded-lg overflow-scroll bg-white shadow-xl mt-0 md:mt-16">
         <!-- Title Stepper OnBoarding Step -->
-		<div class="grid grid-cols-1 py-4 md:py-6">
-			<!-- Step 1 -->
-			<div class="flex flex-col items-center">
-				<div
-					class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-orange-600 text-white"
-				>
-					1
-				</div>
-				<div class="mt-2 text-sm text-orange-600 text-center">
-					Request a Collaboration
-				</div>
-			</div>
-		</div>
+        <div class="grid grid-cols-1 py-4 md:py-6">
+            <!-- Step 1 -->
+            <div class="flex flex-col items-center">
+                <div class="w-10 h-10 flex items-center justify-center rounded-full font-bold bg-orange-600 text-white">
+                    1
+                </div>
+                <div class="mt-2 text-sm text-orange-600 text-center">
+                    Request a Collaboration
+                </div>
+            </div>
+        </div>
         {{-- Horizontal --}}
         <hr class="border-t border-gray-300 border-opacity-50" />
         <!-- content -->
@@ -40,13 +37,11 @@ class="h-full md:h-3/4 max-h-full md:max-h-[80vh] w-full md:w-3/4 bg-white md:ro
                     <!-- Product ID -->
                     <div class="relative w-full">
                         <label for="product_id" class="block text-sm font-medium mb-1">Product</label>
-                        <select
-                            name="product_id"
-                            id="product_id"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 flex items-center justify-between gap-2 transition duration-300 ease-in-out"
-                        >
-                            @foreach($products as $p)
-                            <option value="{{ $p['id'] }}" style="background-color: white; color: #333;" {{ $product_id === $p['id'] ? 'selected': null }} >{{ $p['name'] }}</option>
+                        <select name="product_id" id="product_id"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 flex items-center justify-between gap-2 transition duration-300 ease-in-out">
+                            @foreach ($products as $p)
+                                <option value="{{ $p['id'] }}" style="background-color: white; color: #333;"
+                                    {{ $product_id === $p['id'] ? 'selected' : null }}>{{ $p['name'] }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -54,15 +49,9 @@ class="h-full md:h-3/4 max-h-full md:max-h-[80vh] w-full md:w-3/4 bg-white md:ro
                     <!-- Quantity -->
                     <div class="w-full">
                         <label for="quantity" class="block text-sm font-medium mb-1">Quantity</label>
-                        <input
-                            type="number"
-                            name="quantity"
-                            id="quantity"
-                            class="w-full rounded-lg border-gray-300 focus:ring-opacity-50"
-                            placeholder="Quantity"
-                            value="{{ (old('quantity') ? old('quantity') : $quantity) ? $quantity : 1 }}"
-                            required
-                        >
+                        <input type="number" name="quantity" id="quantity"
+                            class="w-full rounded-lg border-gray-300 focus:ring-opacity-50" placeholder="Quantity"
+                            value="{{ (old('quantity') ? old('quantity') : $quantity) ? $quantity : 1 }}" required>
                         @error('quantity')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -71,13 +60,8 @@ class="h-full md:h-3/4 max-h-full md:max-h-[80vh] w-full md:w-3/4 bg-white md:ro
                     <!-- Address -->
                     <div class="w-full">
                         <label for="address" class="block text-sm font-medium mb-1">Address</label>
-                        <textarea
-                            name="address"
-                            id="address"
-                            class="w-full rounded-lg border-gray-300 focus:ring-opacity-50"
-                            placeholder="address"
-                            rows="2"
-                        >{{ old('address') }}</textarea>
+                        <textarea name="address" id="address" class="w-full rounded-lg border-gray-300 focus:ring-opacity-50"
+                            placeholder="address" rows="2">{{ old('address') }}</textarea>
                         @error('address')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -87,8 +71,8 @@ class="h-full md:h-3/4 max-h-full md:max-h-[80vh] w-full md:w-3/4 bg-white md:ro
                     <div class="w-full">
                         <label for="custom_design" class="block text-sm font-medium mb-1">Custom File</label>
                         <input
-                        class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
-                        type="file" accept=".png" id="custom_design" name="custom_design" />
+                            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
+                            type="file" accept=".png" id="custom_design" name="custom_design" />
                         @error('custom_design')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -97,13 +81,8 @@ class="h-full md:h-3/4 max-h-full md:max-h-[80vh] w-full md:w-3/4 bg-white md:ro
                     <!-- Description -->
                     <div class="w-full">
                         <label for="description" class="block text-sm font-medium mb-1">Description</label>
-                        <textarea
-                            name="description"
-                            id="description"
-                            class="w-full rounded-lg border-gray-300 focus:ring-opacity-50"
-                            placeholder="Description"
-                            rows="3"
-                        >{{ old('description') }}</textarea>
+                        <textarea name="description" id="description" class="w-full rounded-lg border-gray-300 focus:ring-opacity-50"
+                            placeholder="Description" rows="3">{{ old('description') }}</textarea>
                         @error('description')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -112,21 +91,16 @@ class="h-full md:h-3/4 max-h-full md:max-h-[80vh] w-full md:w-3/4 bg-white md:ro
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full mt-4 items-center">
                         <!-- Already Have One Button -->
                         <div class="h-full">
-                            <a
-                                href="{{ route('order.add') }}"
-                                class="h-full w-full inline-block bg-gray-100 text-center rounded-lg py-2 px-4 transition duration-300"
-                            >
+                            <a href="{{ route('order.add') }}"
+                                class="h-full w-full inline-block bg-gray-100 text-center rounded-lg py-2 px-4 transition duration-300">
                                 Change to Order
                             </a>
                         </div>
 
                         <!-- Submit (Next) Button -->
                         <div class=h-full>
-                            <button
-                                id="submit"
-                                type="button"
-                                class="h-full w-full bg-orange-600 hover:bg-orange-700 text-white rounded-lg py-2 px-4 transition duration-300"
-                            >
+                            <button id="submit" type="button"
+                                class="h-full w-full bg-orange-600 hover:bg-orange-700 text-white rounded-lg py-2 px-4 transition duration-300">
                                 Submit Request
                             </button>
                         </div>
@@ -139,20 +113,25 @@ class="h-full md:h-3/4 max-h-full md:max-h-[80vh] w-full md:w-3/4 bg-white md:ro
                         Request a Collaboration!
                     </h2>
 
-                    <p class="text-md lg:text-lg text-start mt-6 px-8">
-                        The Company Here will be your first step into joining our community.
-                        You can create a company that will be used to manage your stores.
-                        You can also create multiple companies under one account.
+                    <!-- Image Above Text, Centered -->
+                    <div class="mb-6 flex justify-center">
+                        <img src="{{ asset('images/collab.jpg') }}" alt="Collaboration Image"
+                            class="w-[70%] h-auto object-cover">
+                    </div>
+
+                    <p class="text-md lg:text-lg text-center mt-6 px-12">
+                        Join our community to create and manage your company, and collaborate with other companies under one
+                        account.
                     </p>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 @endsection()
 @section('script')
     <script>
-        $(document).ready(function(){
-            $('#submit').on('click',function(){
+        $(document).ready(function() {
+            $('#submit').on('click', function() {
                 // Get the form data
                 var formData = new FormData();
                 formData.append('product_id', $('#product_id').val());
