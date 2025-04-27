@@ -334,8 +334,8 @@ function handleHoverAndNavigation(elements, category) {
     // Click event for navigation
     element.addEventListener('click', () => {
       // Redirect to the products page with the category parameter
-      console.log("Redirecting to:", categoryUrls[category]);
-      window.location.href = categoryUrls[category];
+      console.log("Redirecting to:", 'products?category=' + category);
+      location.href = 'products?category=' + category;
     });
   });
 }
