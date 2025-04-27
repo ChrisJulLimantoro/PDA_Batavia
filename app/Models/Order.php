@@ -40,7 +40,7 @@ class Order extends Model
     public static function validationRules()
     {
         return [
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
             'quantity' => 'required|integer',
             'total_price' => 'required|numeric',
             'status' => 'nullable|integer|max:50',
@@ -67,7 +67,6 @@ class Order extends Model
     public static function validationMessages()
     {
         return [
-            'description.required' => 'Description is required',
             'description.string' => 'Description must be a string',
             'description.max' => 'Description must be less than 255 characters',
             'quantity.required' => 'Quantity is required',

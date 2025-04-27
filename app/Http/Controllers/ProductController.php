@@ -132,13 +132,17 @@ class ProductController extends BaseController
 
         // Validate the image
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
         ]);
 
         // Fetch API
+        try{
         $result = Http::attach('file', file_get_contents($image), 'image.jpg')
             ->post('http://0.0.0.0:8000/predict');
         $response = json_decode($result->body(), true);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error fetching data from API'], 500);
+        }
         return response()->json(['query' => $response['predicted_class']]);
     }
 
@@ -172,7 +176,7 @@ class ProductController extends BaseController
 
             Here is the prompt:
             ".$search;
-        dd($prompt);
+        // dd($prompt);
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -197,6 +201,7 @@ class ProductController extends BaseController
 
         // Decode the JSON string
         $decodedJson = json_decode($jsonString, true);
+
         // Fetch the products based on the decoded JSON
         if($decodedJson){
             $res = $this->model

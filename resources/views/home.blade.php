@@ -377,7 +377,7 @@
         <div class="container mx-auto px-4 sm:px-6 py-16 md:py-24">
             <div class="text-center mb-16 section-title opacity-1 transform translate-y-10">
                 <span class="text-amber-600 tracking-widest text-sm font-medium">CURATED SELECTION</span>
-                <h2 class="text-3xl md:text-4xl font-light mt-4 mb-4">Artisanal Masterpieces</h2>
+                <h2 class="text-3xl md:text-4xl font-light mt-4 mb-4">Artisan Masterpieces</h2>
                 <div class="w-20 h-px bg-amber-500 mx-auto"></div>
                 <p class="text-gray-600 mt-6 max-w-2xl mx-auto font-light italic">Each piece is individually selected for
                     its exceptional craftsmanship</p>
@@ -460,7 +460,7 @@
                     <div class="absolute -left-10 -bottom-10 w-48 h-48 bg-amber-200 rounded-full opacity-10"></div>
 
                     <div class="relative z-10">
-                        <span class="text-xs font-semibold tracking-wider text-amber-600">ARTISANAL HERITAGE</span>
+                        <span class="text-xs font-semibold tracking-wider text-amber-600">ARTISAN HERITAGE</span>
                         <h2 class="text-3xl md:text-4xl font-light text-gray-800 mt-4 mb-6">The Art Behind the Fabric</h2>
                         <p class="text-gray-600 leading-relaxed max-w-md font-light">
                             Our textiles are more than just fabric - they're the result of generations of knowledge,
